@@ -1,0 +1,167 @@
+/**
+ * TOKENS TEMPLATE
+ *
+ * Fill in every {{PLACEHOLDER}}. Read the comments before deleting them —
+ * each one exists because skipping the thing it describes produced a real
+ * bug once. See ../references/bug-catalog.md for the incidents.
+ *
+ * Never hand-type a hex code or a color literal in a component. If it's not
+ * a token here, add it here first, then reference it.
+ */
+
+:root {
+  /* ============================================================
+     CHANNEL TRIPLETS — the only place a color is actually authored
+     ============================================================
+     Author every color ONCE, as raw R G B channels (no `#`, no `rgb()`).
+     Everything else below derives from these via rgb(var(--x-rgb) / alpha).
+     To change a color, change its triplet here. Nothing else.
+
+     Why not just hex + a separate rgba() for opacity? Because Tailwind
+     (and most utility CSS) opacity modifiers (bg-x/40) cannot compose an
+     alpha channel onto an opaque `var(--x)` hex value — the class
+     silently resolves to nothing. See bug-catalog.md #1.
+     ============================================================ */
+
+  /* Neutrals — fill in your elevation scale. Even a 2-tier system
+     (background + panel) should be triplets, not hex. */
+  --{{SURFACE_PAGE}}-rgb: 0 0 0;         /* the page itself */
+  --{{SURFACE_RECESSED}}-rgb: 0 0 0;      /* wells, inputs, insets */
+  --{{SURFACE_RAISED}}-rgb: 0 0 0;        /* cards, panels, modals */
+  --{{TEXT_PRIMARY}}-rgb: 255 255 255;
+  --{{TEXT_SECONDARY}}-rgb: 255 255 255;   /* secondary text ONLY — never body copy */
+
+  /* Categorical / brand colors — one per category. Add a -text variant
+     triplet for EVERY one of these; base colors are fills/borders only,
+     never glyphs (bug-catalog.md #2). */
+  --{{CATEGORY_1}}-rgb: 0 0 0;
+  --{{CATEGORY_1}}-text-rgb: 0 0 0;     /* verify >=4.5:1 against every surface tier below */
+  --{{CATEGORY_2}}-rgb: 0 0 0;
+  --{{CATEGORY_2}}-text-rgb: 0 0 0;
+
+  /* Semantic — separate axis from categorical color, even if a value is
+     reused (e.g. "error" and a brand color can share a hex but must not
+     share a variable — they will diverge eventually). */
+  --semantic-error-rgb: 220 38 38;
+  --semantic-error-text-rgb: 0 0 0;     /* fill in: must clear AA as a glyph */
+  --semantic-warning-rgb: 234 179 8;
+  --semantic-warning-text-rgb: 0 0 0;
+  --semantic-success-rgb: 34 197 94;
+  --semantic-success-text-rgb: 0 0 0;
+
+  /* ============================================================
+     DERIVED VALUES — everything below reads a triplet above
+     ============================================================ */
+
+  /* — Elevation — measure the composited contrast between tiers before
+     committing to which is the page default. See bug-catalog.md #3:
+     a real system shipped an elevation model nobody had measured, and
+     reversed it after finally computing 1.04:1 vs 1.19:1 separation. */
+  --{{SURFACE_PAGE}}: rgb(var(--{{SURFACE_PAGE}}-rgb));
+  --{{SURFACE_RECESSED}}: rgb(var(--{{SURFACE_RECESSED}}-rgb));
+  --{{SURFACE_RAISED}}: rgb(var(--{{SURFACE_RAISED}}-rgb));
+  --{{TEXT_PRIMARY}}: rgb(var(--{{TEXT_PRIMARY}}-rgb));
+  --{{TEXT_SECONDARY}}: rgb(var(--{{TEXT_SECONDARY}}-rgb));
+
+  /* Hairlines — tune these AGAINST your actual page surface, not in the
+     abstract. A border strength that works on a mid-gray page can
+     dissolve to near-invisible against pure black or pure white. */
+  --line: rgb(var(--{{TEXT_PRIMARY}}-rgb) / 0.14);
+  --line-strong: rgb(var(--{{TEXT_PRIMARY}}-rgb) / 0.24);
+
+  /* — Categorical colors, derived — */
+  --{{CATEGORY_1}}: rgb(var(--{{CATEGORY_1}}-rgb));
+  --{{CATEGORY_1}}-text: rgb(var(--{{CATEGORY_1}}-text-rgb));
+  --{{CATEGORY_1}}-soft: rgb(var(--{{CATEGORY_1}}-rgb) / 0.18);
+  --{{CATEGORY_1}}-glow: rgb(var(--{{CATEGORY_1}}-rgb) / 0.45);
+
+  --{{CATEGORY_2}}: rgb(var(--{{CATEGORY_2}}-rgb));
+  --{{CATEGORY_2}}-text: rgb(var(--{{CATEGORY_2}}-text-rgb));
+  --{{CATEGORY_2}}-soft: rgb(var(--{{CATEGORY_2}}-rgb) / 0.18);
+  --{{CATEGORY_2}}-glow: rgb(var(--{{CATEGORY_2}}-rgb) / 0.45);
+
+  /* — Semantic, derived — */
+  --semantic-error: rgb(var(--semantic-error-rgb));
+  --semantic-error-text: rgb(var(--semantic-error-text-rgb));
+  --semantic-warning: rgb(var(--semantic-warning-rgb));
+  --semantic-warning-text: rgb(var(--semantic-warning-text-rgb));
+  --semantic-success: rgb(var(--semantic-success-rgb));
+  --semantic-success-text: rgb(var(--semantic-success-text-rgb));
+
+  /* ============================================================
+     GLOW NAMESPACE — split by WHAT the glow is attached to, each with
+     its own numeric cap enforced in the guard script, not just prose.
+     Skipping the split is how full-page ambient glow creeps back in
+     one component at a time, each one individually "just a subtle
+     effect." (bug-catalog.md, the aura/halo/sheen/edge lineage.)
+     ============================================================ */
+  --aura-{{CATEGORY_1}}: rgb(var(--{{CATEGORY_1}}-rgb) / 0.055);  /* tints a BACKGROUND. Cap ~0.05-0.08. Rare — usually one hue, one section. */
+  --halo-{{CATEGORY_1}}: rgb(var(--{{CATEGORY_1}}-rgb) / 0.3);    /* sits BEHIND an object (icon, figure). Can be much brighter — it's emphasis on a thing, not the page. */
+  --sheen-{{CATEGORY_1}}: rgb(var(--{{CATEGORY_1}}-rgb) / 0.05);  /* lies ON a reading surface. Cap LOW — it covers content people read. */
+  --edge-{{CATEGORY_1}}: rgb(var(--{{CATEGORY_1}}-rgb) / 0.55);   /* lies on a 1px border. Can be bright — it touches no reading content. */
+
+  /* ============================================================
+     TYPE SCALE — fixed below ~20px, fluid (clamp) above so display
+     sizes don't need per-breakpoint variants.
+     ============================================================ */
+  --text-xs: 0.875rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;      /* body prose default */
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: clamp(1.75rem, 1.45rem + 1.4vw, 2rem);
+  --text-3xl: clamp(1.9rem, 1.4rem + 2.2vw, 2.375rem);
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+
+  --tracking-label: 0.1em;      /* uppercase mono/label text */
+  --tracking-display: -0.015em; /* headings */
+
+  /* Line-length rule — decide this explicitly, don't leave it to per-page
+     max-width guesses. 45-75 characters is the range that doesn't cost
+     comprehension; 68ch is a reasonable default at ~17px body text. */
+  --measure: 68ch;
+
+  /* ============================================================
+     SPACING / RADIUS — fill in your own scale and register (sharp vs
+     soft corners is an identity decision, make it once, apply everywhere).
+     ============================================================ */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 6px;
+
+  /* ============================================================
+     MOTION — one curve, three durations. If a JS animation library
+     will consume these, mirror them EXACTLY as JS constants in a
+     motion.ts/js file and check the two against each other in the
+     guard script — a CSS variable is invisible to JS, and a hand-typed
+     bezier drifts immediately and invisibly (bug-catalog.md #4).
+     ============================================================ */
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-default: 400ms;
+  --duration-slow: 700ms;
+}
+
+/* ============================================================
+   REDUCED MOTION — every entrance/decorative animation must respect
+   this. Put it here, once, rather than trusting every consumer or
+   every showcase demo to remember it separately.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

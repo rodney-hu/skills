@@ -1,0 +1,52 @@
+{
+  "skill_name": "rodney-writing-style",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Write a LinkedIn post about how business owners are making hiring decisions too late because they can't see their numbers in real-time. Target: beauty business owners. Outcome: Get them to book a call.",
+      "expected_output": "A social post that follows Rodney's style: direct opening, short sentences, specific numbers, clear belief change, and CTA to book call. Should pass social post verification.",
+      "files": [],
+      "expectations": [
+        "Post is 75-150 words",
+        "Opens with contrarian or direct statement about delayed decisions",
+        "Uses specific numbers (days, weeks, percentages)",
+        "Uses 'you' more than 'we' or 'I'",
+        "Contains no business jargon (optimize, leverage, strategic)",
+        "Ends with clear CTA to book call",
+        "Includes multiple short sentences and good white space",
+        "Would pass verification script with 80%+ pass rate"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Turn this voice note into a social post: 'So I was talking to a client yesterday and they were telling me about how they have like 15 different apps and tools and they spend more time managing the tools than actually doing the work. And I was like, that's the problem right there, you added all these productivity tools thinking they would help but now you're less productive because you're just managing software. What I told them is you need to cut it down to like 3 core tools max and actually use them properly instead of having this whole stack of stuff you barely touch.'",
+      "expected_output": "A polished post that preserves the voice and core message while removing filler words and structuring it properly. Should use stream-of-consciousness cleanup methodology.",
+      "files": [],
+      "expectations": [
+        "Removes filler words (like, so) but keeps authentic voice",
+        "Preserves the core insight about tool complexity",
+        "Uses specific number (15 tools vs 3)",
+        "Structures into clear opening, problem, insight, solution",
+        "Short punchy sentences",
+        "No meta-talk ('I was talking to', 'what I told them')",
+        "Ends with clear takeaway or question"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Write a cold outreach message to a medspa owner who just posted on LinkedIn about struggling to find a good bookkeeper. Offer: Real-time financial dashboard that shows cash, profit per service, and burn rate. Takes 3 days to set up.",
+      "expected_output": "A 50-100 word outreach following the pattern: Observation → Problem → Value → Ask. Should be about them, not salesy, with low-friction close.",
+      "files": [],
+      "expectations": [
+        "50-100 words total",
+        "References their specific situation (posted about bookkeeper)",
+        "Identifies the underlying problem (time/visibility)",
+        "Presents specific value (3 numbers, 3 days)",
+        "Ends with low-friction question ('Worth a look?' style)",
+        "Uses 'you' more than 'I'",
+        "No meeting request or high-pressure language",
+        "Would pass outreach verification with 80%+ pass rate"
+      ]
+    }
+  ]
+}

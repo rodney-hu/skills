@@ -1,0 +1,7 @@
+# Private per-skill values (Notion IDs, personal context)
+config.local.md
+# Built zips for claude.ai upload
+dist/
+.DS_Store
+node_modules/
+__pycache__/
