@@ -13,7 +13,7 @@ This repo is the master copy. Every tool I use links to or installs from it.
 | claude.ai (chat, Cowork) | `scripts/package.sh <name>` builds `dist/<name>.zip`; upload it at Settings → Capabilities → Skills |
 | A server (Grokbot, cron agents) | `git clone https://github.com/rodney-hu/skills` and point the agent at `skills/`. Keep it current with a `git pull` cron |
 
-Some skills read workspace IDs (Notion pages, databases) from a `config.local.md` in their folder. Copy `config.example.md` to `config.local.md` and fill it in. It is git-ignored.
+Some skills read workspace IDs (Notion pages, databases) from a `config.local.md` in their folder. Copy `config.example.md` to `config.local.md` and fill it in. It is git-ignored. (On my machines these come from a private companion repo.)
 
 ## Catalog
 
