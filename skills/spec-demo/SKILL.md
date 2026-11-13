@@ -9,11 +9,11 @@ description: Build a free spec-demo landing page and thank-you page for a prospe
 
 Kit: `{{SPEC_DEMO_KIT_DIR}}`. Read its `README.md` first. It holds the SOP, the copy rules and the folder layout. The finished reference is `examples/{{SPEC_DEMO_REFERENCE}}/`.
 
-Input: one prospect URL, plus an optional audience segment. Work in `~/Desktop/RodneyOS/01 Projects/spec-demos/<company-slug>/`.
+Input: one prospect URL, plus an optional audience segment. Work in `{{SPEC_DEMO_OUTPUT_DIR}}/<company-slug>/`. When a config key lists several machines, use the value whose path exists here.
 
 ## Before you start
 - Read the Notion Agent Front Door and the **Spec Demo Library** row in Active Projects (the standing home for every spec demo). Add or claim the checklist item `Demo: <Company>` per the Shared checklist protocol. Do not file demos under Ghostwriting Offer, and do not create a new Active Projects row per demo.
-- Search for an existing folder in `spec-demos/` first. Reuse what is there.
+- Run the pull in **Save to the repo** first, then search `{{SPEC_DEMO_OUTPUT_DIR}}` for an existing folder. Reuse what is there.
 - Nothing is sent to the prospect. Outreach, deploys and DNS need Rodney's approval.
 
 ## 1. Research → `research/brief.md`
@@ -45,8 +45,20 @@ Follow the `firecrawl-website-design-clone` skill's collection step:
 5. `node "<kit>/shoot.mjs" .`. Look at all three screenshots: the theme matches their site, the hero card is balanced with the text, nothing overflows on mobile, and the logo shows.
 6. Send Rodney the screenshots, then add a short note: the audience, the asset name and any open claims.
 
+## Save to the repo
+If `{{SPEC_DEMO_OUTPUT_DIR}}` is a git repo, it is shared with other agents. Keep it in sync:
+- **Before starting:** `git -C "{{SPEC_DEMO_OUTPUT_DIR}}" pull --rebase`.
+- **After each stage** (research brief, design capture, approved offer, rendered page and screenshots), from inside `{{SPEC_DEMO_OUTPUT_DIR}}`:
+  ```bash
+  git add "<company-slug>/"
+  git commit -m "<company-slug>: <stage>"
+  git push
+  ```
+- Stage only this demo's folder. Never force-push, and never rewrite history.
+- If the push is rejected, run `git pull --rebase` and push once more. If it still fails, stop and report the error.
+
 ## Hand-off
-List the local paths: `site/index.html`, `screenshots/`, `research/brief.md` and `copy/offer.md`. Offer these next steps, and do none of them without a yes:
+List the local paths and the repo link to the demo folder: `site/index.html`, `screenshots/`, `research/brief.md` and `copy/offer.md`. Offer these next steps, and do none of them without a yes:
 - deploy (README, "Going further")
 - write the emails
 - record a Loom (Rodney's)
