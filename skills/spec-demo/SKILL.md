@@ -70,4 +70,5 @@ Then run `/close-loop`.
 ## Rules
 - Edit `demo.json` and re-render. Never hand-edit `site/`.
 - To change the layout for every future demo, edit the kit. Don't fork the layout in a single demo.
-- Never reproduce the prospect's copy as your own. Their claims go only in About, attributed with a source link.
+- Never reproduce the prospect's copy as your own. Their claims go only in About, and the page shows no source links. Record each claim's page in `about.sources` in `demo.json`.
+- No "demo" wording on the page except the footer disclaimer. Buttons, the form heading and the fine print use normal offer copy.
