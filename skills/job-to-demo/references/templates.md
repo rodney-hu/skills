@@ -17,13 +17,13 @@ This applies to the copy blocks only. The notes around them are normal case.
 
 | Beat | Length | What to do |
 |------|--------|-----------|
-| 1. Noticed | ~25 sec | Show their page. Say what you saw. Say the hypothesis with care. |
-| 2. Winners | ~30 sec | One pattern from similar companies. |
+| 1. Noticed | ~25 sec | Show the job post. Name the role and the outcome they're hiring for. |
+| 2. Understood | ~30 sec | The problem underneath the role, framed as a guess. |
 | 3. Built | ~45 sec | Run the asset. Show the result before explaining the tool. |
 | 4. Offer | ~20 sec | Say what is simulated. Invite a correction. One easy next step. Stop. |
 
-Say their name and the specific thing in the first 5 seconds. Show their page first, then
-the asset. Loom title: "[name], quick look at [thing]".
+Say their name and the role in the first 5 seconds. Show the post first, then the demo.
+Loom title: "[name], quick demo for the [role] role".
 
 ## Real reference: Rodney's own LinkedIn DM
 
@@ -82,13 +82,13 @@ Message 2
 ## Cover message: email
 
 ```
-subject: [name], quick video on [specific thing]
+subject: [name], a quick demo for the [role] role
 
 hi [name],
 
-I saw [specific thing], so I made you a short video ([2] min).
+saw you're hiring a [role] to [outcome], so I built a small version of it for [company] ([2] min video).
 
-it covers [what similar companies do] and [asset I built for you].
+[one line on what the demo does, using their buyer or product]
 
 [link]
 
@@ -103,58 +103,54 @@ hey [name], one more thing from the video: [one useful screenshot or takeaway]. 
 
 ## Written email (no Loom)
 
-Use when the asset speaks for itself and the channel is email. One message.
+Use when the demo speaks for itself and the channel is email. One message.
 
 ```
-subject: [asset name] for [company]
+subject: [demo name] for the [role] role
 
 hi [name],
 
-I was looking at [specific thing] and noticed [what I saw].
+saw the [role] post. the part about [responsibility, in their words] stood out.
 
-I checked a few [similar companies]. the main pattern is [one insight].
+I built a small version of it for [company]: [link]
 
-I made [asset] for you based on that: [link]
-
-if it helps, I can walk you through it. lmk.
+it's [what's simulated], but the logic is real. happy to walk you through how I built it.
 
 rodney
 ```
 
 ## Worked example
 
-**Company:** a 10-person B2B SaaS. **Offer:** lead list and email workflow.
+**Job post:** a 15-person coaching company hiring a "marketing operations specialist" to
+"own our lead flow from opt-in to booked call." Tools named: HubSpot, Zapier. Posted 9 days ago.
 
-- **Signal:** careers page shows an SDR role open for 3 months (source URL, date).
-- **Observation:** the SDR role has been listed for 3 months. The site speaks to three different buyers.
-- **Hypothesis:** outbound may still be founder-led. Unconfirmed.
-- **Winners pattern:** similar teams that book meetings pick one buyer and send to one tight list.
-- **Asset:** one-page list of 25 companies that fit one buyer, each with a contact and a reason to reach out (public data).
-- **Owner:** the founder.
+- **Lane:** 1 (founder-led coaching business)
+- **Observation:** the post asks someone to own lead flow from opt-in to booked call and names HubSpot.
+- **Hypothesis:** new leads may sit in HubSpot without fast follow-up. Unconfirmed.
+- **Asset:** A. An n8n workflow that takes a synthetic opt-in, scores it, writes it to a CRM table, and drafts a same-day booking email. Labeled as synthetic data.
+- **Owner:** the founder, who is named as the hiring manager.
 
-**Loom, beat 1:** "hey sam, it's rodney. I was looking at your careers page and saw the sdr
-role has been open a while. I also noticed your site speaks to three different buyers:
-logistics, retail, and healthcare. so I'm guessing outbound is still mostly on you.
-I could be wrong about that."
+**Loom, beat 1:** "hey dana, it's rodney. saw you're hiring someone to own lead flow from
+opt-in to booked call, so I built a small version of that for you."
 
-**Cover DM (Loom), 2 messages:**
+**DM (Loom), 2 messages:**
 
 ```
 Message 1
-made you a quick video about your outbound: [link]
+saw the marketing ops role, so I made you a quick demo: [link]
 
 Message 2
-there's a list of 25 mid-size logistics companies hiring dispatchers in it
+it takes a new opt-in, scores it, and drafts the booking email same day. synthetic leads, real logic
 ```
 
 **DM with no Loom, 3 messages:**
 
 ```
 Message 1
-put together a list of 25 mid-size logistics companies hiring dispatchers, with a reason to reach out for each: [link]
+built a small version of the lead flow from your marketing ops post: [link]
 
 Message 2
-could save you the first hour of outbound research, or give the next sdr a head start
+could get every new opt-in a booking email the same day, or flag the ones worth a personal reply
 
 Message 3
 happy to walk you through how I built it
