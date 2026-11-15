@@ -30,7 +30,7 @@ Some skills read workspace IDs (Notion pages, databases) from a `config.local.md
 ### Prospecting and outreach
 | Skill | What it does |
 |---|---|
-| [value-first-outreach](skills/value-first-outreach) | Turns a target company into a signal, an asset spec and ready-to-send DM, email and Loom script |
+| [job-to-demo](skills/job-to-demo) | Turns a job post into a built demo for the hiring manager, plus a Loom script, DMs, email and follow-up |
 | [cold-email-writer](skills/cold-email-writer) | Writes cold emails to a deliverability-aware SOP |
 | [spec-demo](skills/spec-demo) | Builds a free brand-matched landing page and thank-you page for a prospect from one URL |
 | [prospect-intelligence](skills/prospect-intelligence) | Turns a YouTube channel or company URL into an outreach brief and a free consulting brief |
