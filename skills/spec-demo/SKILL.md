@@ -24,7 +24,7 @@ Input: one prospect URL, plus an optional audience segment. Work in `{{SPEC_DEMO
 5. **Gate:** recommend one segment and why, then ask Rodney to pick. Record his choice in the brief.
 
 ## 2. Design capture → `design/`
-Follow the `firecrawl-website-design-clone` skill's collection step:
+The operator runs this capture before the session (it needs Firecrawl and a browser) and passes the files into the demo's `design/` folder. If `design/` already holds them, check them and move on. Otherwise collect them:
 - Scrape `branding,images` to `design/branding.json`, and take a full-page screenshot to `design/screenshot.png`.
 - If the screenshot fails, use headless Chrome, or ask Rodney for one.
 - Download the logo from `branding.logo` to `design/logo.<ext>`. If none is usable, omit `about.logo` and the layout drops the logo card.
