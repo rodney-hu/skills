@@ -28,6 +28,7 @@ The operator runs this capture before the session (it needs Firecrawl and a brow
 - Scrape `branding,images` to `design/branding.json`, and take a full-page screenshot to `design/screenshot.png`.
 - If the screenshot fails, use headless Chrome, or ask Rodney for one.
 - Download the logo from `branding.logo` to `design/logo.<ext>`. If none is usable, omit `about.logo` and the layout drops the logo card.
+- Check the logo's size. If it is under 200px wide, or icon-only (a symbol with no wordmark), flag it to Rodney and look for a higher-res or full-wordmark version first (the site's header or footer SVG, `og:image`, press or brand page, or the `images` scrape). Do this before you build the page. If nothing better exists, say so, and let Rodney decide between that logo and omitting `about.logo`.
 - Look at the screenshot, then write `design/tokens.json` with the `theme` keys from `demo.schema.json`: their background, text, primary, tint, border, hero band (gradient or solid), font (closest Google Font) and radius.
 - Match light or dark to their site. Never add automatic dark mode.
 
