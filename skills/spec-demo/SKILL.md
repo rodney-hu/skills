@@ -29,7 +29,7 @@ The operator runs this capture before the session (it needs Firecrawl and a brow
 - If the screenshot fails, use headless Chrome, or ask Rodney for one.
 - Download the logo from `branding.logo` to `design/logo.<ext>`. If none is usable, omit `about.logo` and the layout drops the logo card.
 - Check the logo's size. If it is under 200px wide, or icon-only (a symbol with no wordmark), flag it to Rodney and look for a higher-res or full-wordmark version first (the site's header or footer SVG, `og:image`, press or brand page, or the `images` scrape). Do this before you build the page. If nothing better exists, say so, and let Rodney decide between that logo and omitting `about.logo`.
-- Look at the screenshot, then write `design/tokens.json` with the `theme` keys from `spec.schema.json`: their background, text, primary, tint, border, hero band (gradient or solid), font (closest Google Font) and radius.
+- Look at the screenshot, then write `design/tokens.json` with the `theme` keys from `demo.schema.json`: their background, text, primary, tint, border, hero band (gradient or solid), font (closest Google Font) and radius.
 - Match light or dark to their site. Never add automatic dark mode.
 
 ## 3. Offer and outline → `copy/offer.md`
@@ -38,8 +38,8 @@ The operator runs this capture before the session (it needs Firecrawl and a brow
 - Use the audience's words from the brief. Put the mistake closest to the prospect's product last.
 - **Gate:** Rodney approves or edits. Don't write the page before this.
 
-## 4. Page → `spec.json`, `site/`, `screenshots/`
-1. Copy `examples/{{SPEC_DEMO_REFERENCE}}/spec.json`, then replace every value from the offer, brief and tokens.
+## 4. Page → `demo.json`, `site/`, `screenshots/`
+1. Copy `examples/{{SPEC_DEMO_REFERENCE}}/demo.json`, then replace every value from the offer, brief and tokens.
 2. Check every copy rule in the README. The page talks only to the prospect's audience. It never mentions Rodney, email courses or drips, and it names no format.
 3. `node "<kit>/render.mjs" .`, then fix whatever it reports.
 4. `grep -niE "email course|day [0-9]|rodney|drip|newsletter|sequence" site/*.html` must return only the footer line. "email" may appear only in the form.
@@ -69,7 +69,7 @@ Never create a My Portfolio row per demo. Packaging means adding the demo, anony
 Then run `/close-loop`.
 
 ## Rules
-- Edit `spec.json` and re-render. Never hand-edit `site/`.
+- Edit `demo.json` and re-render. Never hand-edit `site/`.
 - To change the layout for every future demo, edit the kit. Don't fork the layout in a single demo.
-- Never reproduce the prospect's copy as your own. Their claims go only in About, and the page shows no source links. Record each claim's page in `about.sources` in `spec.json`.
+- Never reproduce the prospect's copy as your own. Their claims go only in About, and the page shows no source links. Record each claim's page in `about.sources` in `demo.json`.
 - No "demo" wording on the page except the footer disclaimer. Buttons, the form heading and the fine print use normal offer copy.
