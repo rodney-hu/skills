@@ -1,74 +1,82 @@
 ---
 name: spec-demo
-description: Build a free spec-demo landing page and thank-you page for a prospect from one URL. Researches the company (Firecrawl map, scrape and search), captures their site design, drafts a Biggest Mistakes offer and outline for their audience, then renders a brand-matched local HTML page with the spec-demo kit. Use whenever Rodney says "spec demo", "build a demo for [company]", "make a landing page for this prospect", "run the demo process on [URL]", or gives a prospect URL and wants a tangible asset to show them. Does not write the emails, set up Resend or deploy, unless Rodney asks.
+description: Turns one prospect URL plus one role title into one free, brand-matched asset for that prospect's audience, deployed to one shareable link. Researches the company and the role (Firecrawl map, scrape and search), captures their site design, routes to the best-fit recipe (lead-magnet page, onboarding course page, buyer-signals table, interactive tool, or checkout page), builds it with the spec-demo kit, deploys it to Vercel and hands back the link, screenshots, a Loom script and a one-line note. Use whenever Rodney says "spec demo", "build a demo for [company]", "make something for this prospect", "build an asset for the [role] at [company]", "run the demo process on [URL]", or gives a prospect URL and wants a tangible asset to show them. Does not send anything to the prospect.
 ---
 
 # Spec demo
 
-> **Config:** values in `{{DOUBLE_BRACES}}` come from `config.local.md` in this skill's folder. If it is missing, copy `config.example.md` to `config.local.md` and fill it in.
+> **Config:** values in `{{DOUBLE_BRACES}}` come from `config.local.md` in this skill's folder. If it is missing, copy `config.example.md` to `config.local.md` and fill it in. When a key lists several machines, use the value whose path exists here.
 
-Kit: `{{SPEC_DEMO_KIT_DIR}}`. Read its `README.md` first. It holds the SOP, the copy rules and the folder layout. The finished reference is `examples/{{SPEC_DEMO_REFERENCE}}/`.
+**Input:** one prospect URL + one role title (e.g. "Head of Clinical Education"). Optional: an audience segment.
+**Done =** one live URL that opens with no login, screenshots of that live page, and `asset-card.md`, `loom-script.md` and `note.md` in `{{SPEC_DEMO_OUTPUT_DIR}}/<company-slug>/`.
 
-Input: one prospect URL, plus an optional audience segment. Work in `{{SPEC_DEMO_OUTPUT_DIR}}/<company-slug>/`. When a config key lists several machines, use the value whose path exists here.
+Kit (templates and renderer): `{{SPEC_DEMO_KIT_DIR}}`. Read its `README.md` first; it holds the copy rules and the folder layout. This skill holds the process: `references/` and `recipes/`.
+
+```
+url + role → 1 research → 2 design → 3 route (asset card = THE gate) → 4 build → 5 deploy + deliver
+```
 
 ## Before you start
-- Read the Notion Agent Front Door and the **Spec Demo Library** row in Active Projects (the standing home for every spec demo). Add or claim the checklist item `Demo: <Company>` per the Shared checklist protocol. Do not file demos under Ghostwriting Offer, and do not create a new Active Projects row per demo.
-- Run the pull in **Save to the repo** first, then search `{{SPEC_DEMO_OUTPUT_DIR}}` for an existing folder. Reuse what is there.
-- Nothing is sent to the prospect. Outreach, deploys and DNS need Rodney's approval.
+- **Cloud session:** if the kit or output folder is missing, `add_repo` `rodney-hu/foundations` (kit) and `rodney-hu/spec-demos` (output), then clone them to `/home/user/`.
+- Read the Notion Agent Front Door and the **Spec Demo Library** row in Active Projects. Add or claim `Demo: <Company>` per the Shared checklist protocol. Never file demos under Ghostwriting Offer, and never create a new Active Projects row per demo.
+- Run the pull in **Save to the repo**, then look for an existing `<company-slug>/` folder. Reuse what is there.
 
 ## 1. Research → `research/brief.md`
-1. `firecrawl map <url>`, saved to `research/sitemap.txt`.
-2. Scrape the home, product, each audience or solution page, about, FAQ, pricing and case studies to `research/pages/<slug>.md`, usually 6 to 10 pages.
-3. Run 4 to 6 `firecrawl search` queries for the audience's own language: pains, mistakes, fears, the category's skeptics, reviews and competitors (Reddit, forums, review sites). Save each to `research/search/<topic>.json`.
-4. Fill `brief-template.md`. Quote real language with its source. Separate the prospect's claims from verified facts.
-5. **Gate:** recommend one segment and why, then ask Rodney to pick. Record his choice in the brief.
+1. `firecrawl map <url>` → `research/sitemap.txt`.
+2. Scrape home, product, each audience or solution page, about, FAQ, pricing and case studies → `research/pages/<slug>.md` (usually 6 to 10).
+3. 4 to 6 `firecrawl search` queries for the audience's own language (pains, mistakes, fears, skeptics, reviews, competitors) → `research/search/<topic>.json`.
+4. 2 to 3 searches for the role's language, per `references/role-lens.md`.
+5. Fill the kit's `brief-template.md`, including **Role lens**. Quote real language with its source. Keep the prospect's claims apart from verified facts.
 
 ## 2. Design capture → `design/`
-The operator runs this capture before the session (it needs Firecrawl and a browser) and passes the files into the demo's `design/` folder. If `design/` already holds them, check them and move on. Otherwise collect them:
-- Scrape `branding,images` to `design/branding.json`, and take a full-page screenshot to `design/screenshot.png`.
-- If the screenshot fails, use headless Chrome, or ask Rodney for one.
-- Download the logo from `branding.logo` to `design/logo.<ext>`. If none is usable, omit `about.logo` and the layout drops the logo card.
-- Look at the screenshot, then write `design/tokens.json` with the `theme` keys from `demo.schema.json`: their background, text, primary, tint, border, hero band (gradient or solid), font (closest Google Font) and radius.
-- Match light or dark to their site. Never add automatic dark mode.
+If `design/` already holds the files, check them and move on. Otherwise:
+- Scrape `branding,images` → `design/branding.json`, plus a full-page screenshot → `design/screenshot.png` (headless Chrome if Firecrawl fails, or ask Rodney).
+- Download the logo → `design/logo.<ext>`. If none is usable, omit `about.logo`.
+- Look at the screenshot, then write `design/tokens.json` with the `theme` keys from `demo.schema.json`. Match their light or dark. Never add automatic dark mode.
 
-## 3. Offer and outline → `copy/offer.md`
-- Use the `copy-eec` skill's Biggest Mistakes formula and the Notion "EEC Offers and Outlines Framework", and fill `offer-template.md`.
-- Build the asset name from the audience plus a golden word, the hook, 5 mistakes (each with an outcome and a fix), the whisper, 3 to 4 About bullets and 4 to 6 FAQs.
-- Use the audience's words from the brief. Put the mistake closest to the prospect's product last.
-- **Gate:** Rodney approves or edits. Don't write the page before this.
+## 3. Route → `asset-card.md` (the only gate)
+1. Score the recipes with `references/router.md`: role KPI fit × company gap × proof available × build cost.
+2. Fill the kit's `asset-card-template.md`: chosen recipe and runner-up, observed signal, hypothesis, asset name, outline, done checks.
+3. **Gate:** show Rodney the card. He approves or edits it. Record the decision on the card. Everything after this runs without stopping.
 
-## 4. Page → `demo.json`, `site/`, `screenshots/`
-1. Copy `examples/{{SPEC_DEMO_REFERENCE}}/demo.json`, then replace every value from the offer, brief and tokens.
-2. Check every copy rule in the README. The page talks only to the prospect's audience. It never mentions Rodney, email courses or drips, and it names no format.
-3. `node "<kit>/render.mjs" .`, then fix whatever it reports.
-4. `grep -niE "email course|day [0-9]|rodney|drip|newsletter|sequence" site/*.html` must return only the footer line. "email" may appear only in the form.
-5. `node "<kit>/shoot.mjs" .`. Look at all three screenshots: the theme matches their site, the hero card is balanced with the text, nothing overflows on mobile, and the logo shows.
-6. Send Rodney the screenshots, then add a short note: the audience, the asset name and any open claims.
+## 4. Build → `demo.json`, `site/`
+Open `recipes/<recipe>.md` and follow it. Every recipe:
+1. Writes its copy plan (the recipe names the file), then `demo.json` with `"recipe": "<recipe>"`, the copy and the `theme` from `design/tokens.json`.
+2. Runs `node "<kit>/render.mjs" .` and fixes whatever it reports. Never hand-edit `site/`.
+3. Passes the copy rules in the kit README and the banned-word grep:
+   `grep -niE "email course|day [0-9]|rodney|drip|newsletter|sequence" site/*.html` returns only the footer line.
+4. Passes the recipe's own done checks.
+
+If the recipe's layout is not in the kit yet (status "planned" in the kit README), build it in the kit first (`recipes/<recipe>/`), following the recipe doc. Never fork a layout inside one demo.
+
+## 5. Deploy + deliver
+1. Deploy `site/` per `references/deploy.md`. Write the URL to `demo.json` (`live_url`) and `asset-card.md`.
+2. `node "<kit>/shoot.mjs" .` (or Playwright on the live URL), desktop + mobile. Look at them: theme matches their site, nothing overflows on mobile, logo shows.
+3. Write `loom-script.md` and `note.md` per `references/delivery-pack.md`.
+4. Send Rodney the link and screenshots, plus a short note: role, recipe, asset name, open claims.
 
 ## Save to the repo
-If `{{SPEC_DEMO_OUTPUT_DIR}}` is a git repo, it is shared with other agents. Keep it in sync:
+If `{{SPEC_DEMO_OUTPUT_DIR}}` is a git repo, other agents share it:
 - **Before starting:** `git -C "{{SPEC_DEMO_OUTPUT_DIR}}" pull --rebase`.
-- **After each stage** (research brief, design capture, approved offer, rendered page and screenshots), from inside `{{SPEC_DEMO_OUTPUT_DIR}}`:
+- **After each stage** (brief, design, approved card, rendered site, deploy + delivery), from inside `{{SPEC_DEMO_OUTPUT_DIR}}`:
   ```bash
   git add "<company-slug>/"
   git commit -m "<company-slug>: <stage>"
   git push
   ```
-- Stage only this demo's folder. Never force-push, and never rewrite history.
-- If the push is rejected, run `git pull --rebase` and push once more. If it still fails, stop and report the error.
+- Stage only this demo's folder. Never force-push or rewrite history. If the push is rejected, `git pull --rebase` and push once more; if it still fails, stop and report.
 
 ## Hand-off
-List the local paths and the repo link to the demo folder: `site/index.html`, `screenshots/`, `research/brief.md` and `copy/offer.md`. Offer these next steps, and do none of them without a yes:
-- deploy (README, "Going further")
-- write the emails
-- record a Loom (Rodney's)
+Give Rodney: the live URL, `screenshots/`, `asset-card.md`, `loom-script.md`, `note.md`, and the repo link to the folder. Offer, and do none without a yes:
+- send the note (Rodney's call, his channel)
+- record the Loom (Rodney's)
+- add real email capture (kit README, "Going further")
 
-Never create a My Portfolio row per demo. Packaging means adding the demo, anonymized, as an example on the existing "Spec-Demo Email Course Funnel" portfolio row, only on Rodney's approval via `/close-loop` step 7.
-
-Then run `/close-loop`.
+Never create a My Portfolio row per demo. Packaging means adding the demo, anonymized, to the existing "Spec-Demo Email Course Funnel" portfolio row, only on Rodney's approval via `/close-loop` step 7. Then run `/close-loop`.
 
 ## Rules
-- Edit `demo.json` and re-render. Never hand-edit `site/`.
-- To change the layout for every future demo, edit the kit. Don't fork the layout in a single demo.
-- Never reproduce the prospect's copy as your own. Their claims go only in About, and the page shows no source links. Record each claim's page in `about.sources` in `demo.json`.
-- No "demo" wording on the page except the footer disclaimer. Buttons, the form heading and the fine print use normal offer copy.
+- One card → one recipe → one live URL. No Resend, no drips, no live payments, no backend.
+- Edit `demo.json` and re-render. Never hand-edit `site/`. Layout changes go in the kit, for every future demo.
+- Never reproduce the prospect's copy as your own. Their claims go only in About (or the recipe's credit block), attributed. Record each claim's page in `about.sources`.
+- No "demo" wording on the page except the footer disclaimer. Buttons, headings and fine print use normal offer copy.
+- Nothing goes to the prospect without Rodney's yes. Deploying is not sending: the URL is noindex and unlisted.
