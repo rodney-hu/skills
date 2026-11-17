@@ -1,0 +1,13 @@
+[
+  {
+    "version": 1,
+    "date": "2026-11-16",
+    "goal": "Landing page converts mobile visitors to the free audit",
+    "tier": "Full",
+    "rounds": 2,
+    "models": {"builder": "sonnet", "reviewer": "opus"},
+    "passed": ["C1", "C3", "D1", "D2", "B1", "B7", "P1"],
+    "failed": ["D6"],
+    "artifact": "commit abc1234"
+  }
+]
