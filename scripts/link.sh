@@ -21,3 +21,13 @@ for T in $TARGETS; do
   done
   echo "linked $(ls "$ROOT/skills" | wc -l | tr -d ' ') skills into $T"
 done
+# Claude Code subagents bundled with a skill (skills/<name>/agents/*.md) go to ~/.claude/agents.
+AGENTS="${AGENTS:-$HOME/.claude/agents}"
+mkdir -p "$AGENTS"
+for src in "$ROOT"/skills/*/agents/*.md; do
+  [ -e "$src" ] || continue
+  dest="$AGENTS/$(basename "$src")"
+  [ -L "$dest" ] && rm "$dest"
+  [ -e "$dest" ] && { echo "skipped $dest (real file exists)"; continue; }
+  ln -s "$src" "$dest"; echo "linked agent $(basename "$src" .md) into $AGENTS"
+done

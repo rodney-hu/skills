@@ -9,7 +9,7 @@ This repo is the master copy. Every tool I use links to or installs from it.
 | Where | How |
 |---|---|
 | Any agent, any machine | `npx skills add rodney-hu/skills` (pick the skills and agents you want) |
-| Claude Code / Antigravity on my Mac | `scripts/link.sh` symlinks every skill into `~/.claude/skills` and `~/.gemini/config/skills` (Antigravity's global folder). Edit once, every tool sees it |
+| Claude Code / Antigravity on my Mac | `scripts/link.sh` symlinks every skill into `~/.claude/skills` and `~/.gemini/config/skills` (Antigravity's global folder), and any `skills/<name>/agents/*.md` subagent into `~/.claude/agents`. Edit once, every tool sees it |
 | claude.ai (chat, Cowork) | `scripts/package.sh <name>` builds `dist/<name>.zip`; upload it at Settings → Capabilities → Skills |
 | A server (Grokbot, cron agents) | `git clone https://github.com/rodney-hu/skills` and point the agent at `skills/`. Keep it current with a `git pull` cron |
 
@@ -54,6 +54,7 @@ Some skills read workspace IDs (Notion pages, databases) from a `config.local.md
 | [design-system-builder](skills/design-system-builder) | Builds a design system from scratch or audits and hardens an existing one |
 | [rodney-post-to-video](skills/rodney-post-to-video) | Turns a post into a beat-synced 1080×1350 motion-graphic video (needs Graphed's `tesseract-motion`) |
 | [idea-to-blueprint](skills/idea-to-blueprint) | Turns a raw idea into an MVP-first project blueprint |
+| [eval-loop](skills/eval-loop) | Builds to a goal contract: pass/fail checks, a read-only Opus reviewer, tiers, round budget and a score ratchet |
 
 ### Operating system
 | Skill | What it does |
@@ -65,7 +66,7 @@ Some skills read workspace IDs (Notion pages, databases) from a `config.local.md
 ## Repo layout
 
 ```
-skills/<name>/SKILL.md     the skill (plus references/, scripts/, assets/ as needed)
+skills/<name>/SKILL.md     the skill (plus references/, scripts/, assets/, agents/ as needed)
 scripts/link.sh            symlink skills into local agent folders
 scripts/package.sh         zip skills for claude.ai upload
 scripts/import.sh          one-time import used to build this repo
