@@ -50,7 +50,7 @@ Open `recipes/<recipe>.md` and follow it. Every recipe:
 If the recipe's layout is not in the kit yet (status "planned" in the kit README), build it in the kit first (`recipes/<recipe>/`), following the recipe doc. Never fork a layout inside one demo.
 
 ## 5. Deploy + deliver
-1. Deploy `site/` per `references/deploy.md`. Write the URL to `demo.json` (`live_url`) and `asset-card.md`.
+1. Deploy `site/` per `references/deploy.md` to `https://<company-slug>-demo.vercel.app` (always this name). Write the URL to `demo.json` (`live_url`) and `asset-card.md`.
 2. `node "<kit>/shoot.mjs" .` (or Playwright on the live URL), desktop + mobile. Look at them: theme matches their site, nothing overflows on mobile, logo shows.
 3. Write `loom-script.md` and `note.md` per `references/delivery-pack.md`.
 4. Send Rodney the link and screenshots, plus a short note: role, recipe, asset name, open claims.

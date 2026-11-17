@@ -3,7 +3,8 @@
 Every recipe renders a static `site/` (HTML, CSS, JS, assets, and a `vercel.json` noindex header written by `render.mjs`). Deploy it the same way every time.
 
 - **Team:** `{{SPEC_DEMO_VERCEL_TEAM}}`. Never Rodney's personal account. Find the team ID with the Vercel MCP `list_teams`.
-- **Project name:** `<company-slug>-<recipe>` (e.g. `vista-ai-lead-magnet-page`). The URL is `https://<project>.vercel.app`, unless Vercel suffixes it; use the URL the deploy returns.
+- **Naming (fixed, every demo):** project `<company-slug>-demo`, link `https://<company-slug>-demo.vercel.app` (e.g. `vista-ai-demo.vercel.app`). One project per company, never per recipe. `<company-slug>` is the demo's folder name in spec-demos.
+- **Before deploying,** `list_projects` with `search: "<company-slug>-demo"`. If it exists, deploy into it (a new recipe for the same company replaces the old page; say so on the card). If the `.vercel.app` name is taken outside the team, stop and ask Rodney; never accept a suffixed URL.
 - **Target:** production, so the short URL is assigned.
 
 ## With the Vercel MCP (default, works in cloud sessions)
@@ -20,5 +21,5 @@ Every recipe renders a static `site/` (HTML, CSS, JS, assets, and a `vercel.json
 ## After deploy
 - Write the URL to `demo.json` (`live_url`) and to `asset-card.md`.
 - Screenshot the live URL, not the local file.
-- Editing later: change `demo.json`, re-render, deploy again to the same project. The URL stays the same.
+- Editing later: change `demo.json`, re-render, deploy again to `<company-slug>-demo`. The URL stays the same.
 - Deploying is not sending. The page is noindex and unlisted. Sharing it with the prospect needs Rodney's yes.
