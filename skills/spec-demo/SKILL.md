@@ -32,6 +32,7 @@ url + role → 1 research → 2 design → 3 route (asset card = THE gate) → 4
 If `design/` already holds the files, check them and move on. Otherwise:
 - Scrape `branding,images` → `design/branding.json`, plus a full-page screenshot → `design/screenshot.png` (headless Chrome if Firecrawl fails, or ask Rodney).
 - Download the logo → `design/logo.<ext>`. If none is usable, omit `about.logo`.
+- Check the logo's size. If it is under 200px wide, or icon-only (a symbol with no wordmark), flag it to Rodney and look for a higher-res or full-wordmark version first (the site's header or footer SVG, `og:image`, press or brand page, or the `images` scrape). Do this before you build the page. If nothing better exists, say so, and let Rodney decide between that logo and omitting `about.logo`.
 - Look at the screenshot, then write `design/tokens.json` with the `theme` keys from `demo.schema.json`. Match their light or dark. Never add automatic dark mode.
 
 ## 3. Route → `asset-card.md` (the only gate)
