@@ -32,7 +32,7 @@ Some skills read workspace IDs (Notion pages, databases) from a `config.local.md
 |---|---|
 | [job-to-demo](skills/job-to-demo) | Turns a job post into a built demo for the hiring manager, plus a Loom script, DMs, email and follow-up |
 | [cold-email-writer](skills/cold-email-writer) | Writes cold emails to a deliverability-aware SOP |
-| [spec-demo](skills/spec-demo) | Builds a free brand-matched landing page and thank-you page for a prospect from one URL |
+| [spec-demo](skills/spec-demo) | Turns a prospect URL + a role title into one free, brand-matched asset (lead-magnet page, onboarding page, buyer-signals table, interactive tool or checkout page), deployed to one link |
 | [prospect-intelligence](skills/prospect-intelligence) | Turns a YouTube channel or company URL into an outreach brief and a free consulting brief |
 | [brand-intelligence](skills/brand-intelligence) | Extracts a full brand profile from a website, YouTube channel or LinkedIn page |
 | [audience-intelligence](skills/audience-intelligence) | Builds an audience report: ICA, fears, desires, activation moments, language |
