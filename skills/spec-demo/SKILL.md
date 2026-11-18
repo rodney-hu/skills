@@ -18,8 +18,8 @@ url + role → 1 research → 2 design → 3 route (asset card = THE gate) → 4
 
 ## Before you start
 - **Cloud session:** if the kit or output folder is missing, `add_repo` `rodney-hu/foundations` (kit) and `rodney-hu/spec-demos` (output), then clone them to `/home/user/`.
-- Read the Notion Agent Front Door and the **Spec Demo Library** row in Active Projects. Add or claim `Demo: <Company>` per the Shared checklist protocol. Never file demos under Ghostwriting Offer, and never create a new Active Projects row per demo.
-- Run the pull in **Save to the repo**, then look for an existing `<company-slug>/` folder. Reuse what is there.
+- Read the Notion Agent Front Door and the **Spec Demo Library** row in Active Projects. Add or claim `Demo: <Company>` per the Shared checklist protocol, in the format under **Save to GitHub and Notion**. Never file demos under Ghostwriting Offer, and never create a new Active Projects row per demo.
+- Run the pull in **Save to GitHub and Notion**, then look for an existing `<company-slug>/` folder. Reuse what is there.
 
 ## 1. Research → `research/brief.md`
 1. `firecrawl map <url>` → `research/sitemap.txt`.
@@ -56,16 +56,30 @@ If the recipe's layout is not in the kit yet (status "planned" in the kit README
 3. Write `loom-script.md` and `note.md` per `references/delivery-pack.md`.
 4. Send Rodney the link and screenshots, plus a short note: role, recipe, asset name, open claims.
 
-## Save to the repo
-If `{{SPEC_DEMO_OUTPUT_DIR}}` is a git repo, other agents share it:
-- **Before starting:** `git -C "{{SPEC_DEMO_OUTPUT_DIR}}" pull --rebase`.
-- **After each stage** (brief, design, approved card, rendered site, deploy + delivery), from inside `{{SPEC_DEMO_OUTPUT_DIR}}`:
-  ```bash
-  git add "<company-slug>/"
-  git commit -m "<company-slug>: <stage>"
-  git push
-  ```
-- Stage only this demo's folder. Never force-push or rewrite history. If the push is rejected, `git pull --rebase` and push once more; if it still fails, stop and report.
+## Save to GitHub and Notion after every stage
+Every demo lives in two places so other agents (Grokbot included) see the same state: the files in GitHub, the status in Notion. Sync both after **each** stage: brief, design, approved card, rendered site, deploy + delivery. In a batch, sync each company after each of its stages, not once at the end.
+
+**Before starting:** `git -C "{{SPEC_DEMO_OUTPUT_DIR}}" pull --rebase`, then read the Spec Demo Library row. If another agent holds the `Demo: <Company>` claim, stop and ask.
+
+**1. GitHub first.** From inside `{{SPEC_DEMO_OUTPUT_DIR}}` (repo `rodney-hu/spec-demos`):
+```bash
+git add "<company-slug>/"
+git commit -m "<company-slug>: <stage>"
+git push
+```
+Stage only this demo's folder. Never force-push or rewrite history. If the push is rejected, `git pull --rebase` and push once more; if it still fails, stop and report.
+
+**2. Then Notion.** Update the `Demo: <Company>` item on the Spec Demo Library row (Active Projects). Create it on the first stage. Patch only that item, then fetch the page again and confirm the write. It always carries:
+```markdown
+- [ ] Demo: <Company> | In progress: <agent>; claim: <session>; stage <n>/5 <stage name>; updated: <ISO time>
+  - Done when: live link, screenshots, asset card, Loom script and note are in the folder, and Rodney has reviewed them.
+  - Role: <role title> · Recipe: <recipe or "not routed yet">
+  - GitHub: https://github.com/rodney-hu/spec-demos/tree/main/<company-slug> (last commit <short sha>)
+  - Live: <live_url, or "not deployed">
+```
+At the gate, set the status to `Blocked: Rodney to approve the asset card`. After stage 5, set it to `Ready: review needed` and release the claim. Only check the box after Rodney's review.
+
+If the Notion write fails, the stage is not done: report `COMPLETED LOCALLY, NOT SYNCED` with the item text you meant to write. Never let Notion point at a commit that was not pushed.
 
 ## Hand-off
 Give Rodney: the live URL, `screenshots/`, `asset-card.md`, `loom-script.md`, `note.md`, and the repo link to the folder. Offer, and do none without a yes:
