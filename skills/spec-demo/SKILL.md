@@ -69,7 +69,7 @@ git push
 ```
 Stage only this demo's folder. Never force-push or rewrite history. If the push is rejected, `git pull --rebase` and push once more; if it still fails, stop and report.
 
-**2. Then Notion.** Update the `Demo: <Company>` item on the Spec Demo Library row (Active Projects). Create it on the first stage. Patch only that item, then fetch the page again and confirm the write. It always carries:
+**2. Then Notion.** On the Spec Demo Library row (Active Projects), each company has a row in the **Demo roster** table and a toggle (`<toggle heading="h4">`, titled with the company) under **Shared checklist → Demos**. On the first stage, add both. After each stage, update that company's roster row and the `Demo: <Company>` item inside its toggle. Patch only those, then fetch the page again and confirm the write. The item always carries:
 ```markdown
 - [ ] Demo: <Company> | In progress: <agent>; claim: <session>; stage <n>/5 <stage name>; updated: <ISO time>
   - Done when: live link, screenshots, asset card, Loom script and note are in the folder, and Rodney has reviewed them.
