@@ -38,7 +38,7 @@ If `design/` already holds the files, check them and move on. Otherwise:
 ## 3. Route → `asset-card.md` (the only gate)
 1. Score the recipes with `references/router.md`: role KPI fit × company gap × proof available × build cost.
 2. Fill the kit's `asset-card-template.md`: chosen recipe and runner-up, observed signal, hypothesis, asset name, outline, done checks.
-3. **Gate:** show Rodney the card. He approves or edits it. Record the decision on the card. Everything after this runs without stopping.
+3. **Gate:** show Rodney the card. He approves or edits it. Ask for a reply that names every choice, plus "deploy" (for example `approve card: lead-magnet, shield icon, deploy`); a bare "go" or "yes" is not enough for an agent to record approval or publish a page. Record the decision on the card. Everything after this runs without stopping.
 
 ## 4. Build → `demo.json`, `site/`
 Open `recipes/<recipe>.md` and follow it. Every recipe:
@@ -67,7 +67,7 @@ git add "<company-slug>/"
 git commit -m "<company-slug>: <stage>"
 git push
 ```
-Stage only this demo's folder. Never force-push or rewrite history. If the push is rejected, `git pull --rebase` and push once more; if it still fails, stop and report.
+Commit before you pull: `git pull --rebase` fails with uncommitted changes. Stage only this demo's folder. Never force-push or rewrite history. If the push is rejected, `git pull --rebase` and push once more; if it still fails, stop and report.
 
 **2. Then Notion.** On the Spec Demo Library row (Active Projects), each company has a row in the **Demo roster** table and a toggle (`<toggle heading="h4">`, titled with the company) under **Shared checklist → Demos**. On the first stage, add both. After each stage, update that company's roster row and the `Demo: <Company>` item inside its toggle. Patch only those, then fetch the page again and confirm the write. The item always carries:
 ```markdown
