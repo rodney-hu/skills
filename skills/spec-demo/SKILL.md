@@ -26,17 +26,18 @@ url + role → 1 research → 2 design → 3 route (asset card = THE gate) → 4
 2. Scrape home, product, each audience or solution page, about, FAQ, pricing and case studies → `research/pages/<slug>.md` (usually 6 to 10).
 3. 4 to 6 `firecrawl search` queries (run Firecrawl calls one after another, not in parallel: the free tier allows about 12 a minute; Reddit pages can't be scraped, so quote search snippets and mark them as such) for the audience's own language (pains, mistakes, fears, skeptics, reviews, competitors) → `research/search/<topic>.json`.
 4. 2 to 3 searches for the role's language, per `references/role-lens.md`.
-5. Fill the kit's `brief-template.md`, including **Role lens**. Quote real language with its source. Keep the prospect's claims apart from verified facts.
+5. Fill the kit's `brief-template.md`, including **Role lens**. Animated stat counters often scrape as `0+` or `0%`: never quote a number from a scrape that shows 0; find it in a press release or leave it out. Quote real language with its source. Keep the prospect's claims apart from verified facts.
 
 ## 2. Design capture → `design/`
 If `design/` already holds the files, check them and move on. Otherwise:
 - Scrape `branding,images` → `design/branding.json`, plus a full-page screenshot → `design/screenshot.png` (headless Chrome if Firecrawl fails, or ask Rodney). If the full page comes out blank (sites that animate sections in on scroll), take a 1440×900 viewport screenshot instead and note it.
 - Download the logo → `design/logo.<ext>`. If none is usable, omit `about.logo`.
-- Check the logo's size. If it is under 200px wide, or icon-only (a symbol with no wordmark), flag it to Rodney and look for a higher-res or full-wordmark version first (the site's header or footer SVG, `og:image`, press or brand page, or the `images` scrape). Do this before you build the page. If nothing better exists, say so, and let Rodney decide between that logo and omitting `about.logo`. Write what you found to `design/logo-check.md` (file, size, wordmark or icon, options) and add the logo question to the asset card.
+- Check the logo's size. If it is under 200px wide, or icon-only (a symbol with no wordmark), flag it to Rodney and look for a higher-res or full-wordmark version first (the site's header or footer SVG, `og:image`, press or brand page, or the `images` scrape). Do this before you build the page. If nothing better exists, say so, and let Rodney decide between that logo and omitting `about.logo`. If the SVG can't be downloaded (TLS errors, blocked hosts; Firecrawl won't fetch `.svg` files), try the `images` scrape and `og:image`, then crop the logo from `design/screenshot.png` at 2x. Note which one you used. Write what you found to `design/logo-check.md` (file, size, wordmark or icon, options) and add the logo question to the asset card.
 - Look at the screenshot, then write `design/tokens.json` with the `theme` keys from `demo.schema.json`. Match their light or dark. Never add automatic dark mode.
 
 ## 3. Route → `asset-card.md` (the only gate)
 1. Score the recipes with `references/router.md`: role KPI fit × company gap × proof available × build cost.
+   - **buyer-signals seed pass:** if buyer-signals is the default or scores within one point of the leader, run 2 or 3 Firecrawl searches for the rubric's Tier 1 signals first and open the best hits. Score proof 3 only with at least 3 accounts confirmed from opened pages (V), 2 with 1 or 2, and 1 with snippets only. List the seed accounts on the card so Rodney approves real names, not a promise.
 2. Fill the kit's `asset-card-template.md`: chosen recipe and runner-up, observed signal, hypothesis, asset name, outline, done checks.
 3. **Gate:** show Rodney the card. He approves or edits it. Ask for a reply that names every choice, plus "deploy" (for example `approve card: lead-magnet, shield icon, deploy`); a bare "go" or "yes" is not enough for an agent to record approval or publish a page. Record the decision on the card. Everything after this runs without stopping.
 
@@ -52,7 +53,7 @@ If the recipe's layout is not in the kit yet (status "planned" in the kit README
 
 ## 5. Deploy + deliver
 1. Deploy `site/` per `references/deploy.md` to `https://<company-slug>-demo.vercel.app` (always this name). Write the URL to `demo.json` (`live_url`) and `asset-card.md`.
-2. `node "<kit>/shoot.mjs" .` (or Playwright on the live URL), desktop + mobile. Look at them: theme matches their site, nothing overflows on mobile, logo shows.
+2. `node "<kit>/shoot.mjs" . --url https://<company-slug>-demo.vercel.app` (shoots the live site; layouts without a thanks page skip it), desktop + mobile. Look at them: theme matches their site, nothing overflows on mobile, logo shows.
 3. Write `loom-script.md` and `note.md` per `references/delivery-pack.md`.
 4. Send Rodney the link and screenshots, plus a short note: role, recipe, asset name, open claims.
 
@@ -91,7 +92,7 @@ git push
 ```
 Commit before you pull: `git pull --rebase` fails with uncommitted changes. Stage only this demo's folder. Never force-push or rewrite history. If the push is rejected, `git pull --rebase` and push once more; if it still fails, stop and report.
 
-**2. Then Notion.** On the Spec Demo Library row (Active Projects), each company has a row in the **Demo roster** table and a toggle (`<toggle heading="h4">`, titled with the company) under **Shared checklist → Demos**. On the first stage, add both. After each stage, update that company's roster row and the `Demo: <Company>` item inside its toggle. Patch only those, then fetch the page again and confirm the write. The item always carries:
+**2. Then Notion.** On the Spec Demo Library row (Active Projects), each company has a row in the **Demo roster** table and a toggle (`<toggle heading="h4">`, titled with the company) under **Shared checklist → Demos**. On the first stage, add both. After each stage, update that company's roster row and the `Demo: <Company>` item inside its toggle. Patch only those. Confirm the write by checking the update result for that company's row and item. Re-fetch the whole page only on the first write of a run, at a gate, and at the end (the page is large; re-reading it after every stage is wasted context). The item always carries:
 ```markdown
 - [ ] Demo: <Company> | <status>: <agent>; claim: <session or "released">; stage <n>/5 <stage name>; updated: <ISO time>
   - Done when: live link, screenshots, asset card, Loom script and note are in the folder, and Rodney has reviewed them.

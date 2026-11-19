@@ -21,6 +21,12 @@ The role decides what "valuable" means. A marketing lead values leads. An educat
 | **Proof available** | The brief has audience quotes and their own claims to build from | Thin research; would need invention |
 | **Build cost** | Layout exists in the kit (status "live") | Layout must be built first |
 
+**Role KPI fit, worked examples.** Score the asset by what the role is measured on, not by whether it is useful in general.
+- VP Sales + `buyer-signals` = 3 (names who to call). VP Sales + `lead-magnet-page` = 1 (leads are marketing's KPI, even though sales benefits later).
+- Head of Marketing + `lead-magnet-page` = 3. Head of Marketing + `buyer-signals` = 2 (feeds ABM lists, but pipeline is shared).
+- Head of Education + `onboarding-eec` = 3. Head of Education + `lead-magnet-page` = 1.
+- Founder or CEO: 2 for any recipe that hits a company-level number, 3 only for the one tied to their stated priority (press release, investor update, job posts).
+
 Highest product wins. **Tie-break:** strongest proof in the brief, then the one Rodney can explain fastest on camera.
 
 **How Step 1 and Step 2 fit together.** Step 1 names the candidate to beat. Step 2 scores the default and every other recipe, and the highest score wins. While a recipe's layout is still "planned", its build cost scores 1, so it rarely wins. When the Step 1 default loses only on build cost, say so on the card, and add it to the build backlog (README recipe table). That way Rodney can choose to build that layout first.
