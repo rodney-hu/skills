@@ -24,15 +24,15 @@ url + role → 1 research → 2 design → 3 route (asset card = THE gate) → 4
 ## 1. Research → `research/brief.md`
 1. `firecrawl map <url>` → `research/sitemap.txt`.
 2. Scrape home, product, each audience or solution page, about, FAQ, pricing and case studies → `research/pages/<slug>.md` (usually 6 to 10).
-3. 4 to 6 `firecrawl search` queries for the audience's own language (pains, mistakes, fears, skeptics, reviews, competitors) → `research/search/<topic>.json`.
+3. 4 to 6 `firecrawl search` queries (run Firecrawl calls one after another, not in parallel: the free tier allows about 12 a minute; Reddit pages can't be scraped, so quote search snippets and mark them as such) for the audience's own language (pains, mistakes, fears, skeptics, reviews, competitors) → `research/search/<topic>.json`.
 4. 2 to 3 searches for the role's language, per `references/role-lens.md`.
 5. Fill the kit's `brief-template.md`, including **Role lens**. Quote real language with its source. Keep the prospect's claims apart from verified facts.
 
 ## 2. Design capture → `design/`
 If `design/` already holds the files, check them and move on. Otherwise:
-- Scrape `branding,images` → `design/branding.json`, plus a full-page screenshot → `design/screenshot.png` (headless Chrome if Firecrawl fails, or ask Rodney).
+- Scrape `branding,images` → `design/branding.json`, plus a full-page screenshot → `design/screenshot.png` (headless Chrome if Firecrawl fails, or ask Rodney). If the full page comes out blank (sites that animate sections in on scroll), take a 1440×900 viewport screenshot instead and note it.
 - Download the logo → `design/logo.<ext>`. If none is usable, omit `about.logo`.
-- Check the logo's size. If it is under 200px wide, or icon-only (a symbol with no wordmark), flag it to Rodney and look for a higher-res or full-wordmark version first (the site's header or footer SVG, `og:image`, press or brand page, or the `images` scrape). Do this before you build the page. If nothing better exists, say so, and let Rodney decide between that logo and omitting `about.logo`.
+- Check the logo's size. If it is under 200px wide, or icon-only (a symbol with no wordmark), flag it to Rodney and look for a higher-res or full-wordmark version first (the site's header or footer SVG, `og:image`, press or brand page, or the `images` scrape). Do this before you build the page. If nothing better exists, say so, and let Rodney decide between that logo and omitting `about.logo`. Write what you found to `design/logo-check.md` (file, size, wordmark or icon, options) and add the logo question to the asset card.
 - Look at the screenshot, then write `design/tokens.json` with the `theme` keys from `demo.schema.json`. Match their light or dark. Never add automatic dark mode.
 
 ## 3. Route → `asset-card.md` (the only gate)
@@ -71,12 +71,14 @@ Stage only this demo's folder. Never force-push or rewrite history. If the push 
 
 **2. Then Notion.** On the Spec Demo Library row (Active Projects), each company has a row in the **Demo roster** table and a toggle (`<toggle heading="h4">`, titled with the company) under **Shared checklist → Demos**. On the first stage, add both. After each stage, update that company's roster row and the `Demo: <Company>` item inside its toggle. Patch only those, then fetch the page again and confirm the write. The item always carries:
 ```markdown
-- [ ] Demo: <Company> | In progress: <agent>; claim: <session>; stage <n>/5 <stage name>; updated: <ISO time>
+- [ ] Demo: <Company> | <status>: <agent>; claim: <session or "released">; stage <n>/5 <stage name>; updated: <ISO time>
   - Done when: live link, screenshots, asset card, Loom script and note are in the folder, and Rodney has reviewed them.
   - Role: <role title> · Recipe: <recipe or "not routed yet">
-  - GitHub: https://github.com/rodney-hu/spec-demos/tree/main/<company-slug> (last commit <short sha>)
-  - Live: <live_url, or "not deployed">
+  - GitHub: [spec-demos/<company-slug>](https://github.com/rodney-hu/spec-demos/tree/main/<company-slug>) (last commit `<short sha>`)
+  - Live: [<company-slug>-demo.vercel.app](https://<company-slug>-demo.vercel.app), or "not deployed"
 ```
+`<status>` is `In progress`, `Blocked: <what is needed>` or `Ready: review needed`. Write file names in code formatting (`brief.md`) and links as `[label](url)`; Notion turns bare file names and URLs into links, which breaks later find-and-replace edits.
+
 At the gate, set the status to `Blocked: Rodney to approve the asset card`. After stage 5, set it to `Ready: review needed` and release the claim. Only check the box after Rodney's review.
 
 If the Notion write fails, the stage is not done: report `COMPLETED LOCALLY, NOT SYNCED` with the item text you meant to write. Never let Notion point at a commit that was not pushed.
