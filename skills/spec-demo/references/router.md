@@ -23,6 +23,8 @@ The role decides what "valuable" means. A marketing lead values leads. An educat
 
 Highest product wins. **Tie-break:** strongest proof in the brief, then the one Rodney can explain fastest on camera.
 
+**How Step 1 and Step 2 fit together.** Step 1 names the candidate to beat. Step 2 scores the default and every other recipe, and the highest score wins. While a recipe's layout is still "planned", its build cost scores 1, so it rarely wins. When the Step 1 default loses only on build cost, say so on the card, and add it to the build backlog (README recipe table). That way Rodney can choose to build that layout first.
+
 ## Recipe one-liners (for the card)
 
 | Recipe | The link shows | Strong when |

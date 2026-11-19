@@ -18,3 +18,5 @@ Input is a title, never a named person. No contact data, no enrichment tools.
 - The asset name and hero speak to the prospect's audience, not to the role. The role lens decides *which* asset and *which* outcome leads; the page itself still talks to their audience.
 - Exception: `buyer-signals` speaks to the role directly, because the role is the audience.
 - Put the role's KPI in the Loom script and the note, in plain words.
+
+**No job posts for the role?** Founders and small-company roles often have none. Take the KPIs from the role family in `router.md` ("Measured on"), write them in the brief marked *inferred*, and lean on the company's own site and posts for their priorities.
