@@ -1,13 +1,13 @@
 ---
 name: spec-demo
-description: Turns one prospect URL plus one role title into one free, brand-matched asset for that prospect's audience, deployed to one shareable link. Researches the company and the role (Firecrawl map, scrape and search), captures their site design, routes to the best-fit recipe (lead-magnet page, onboarding course page, buyer-signals table, interactive tool, or checkout page), builds it with the spec-demo kit, deploys it to Vercel and hands back the link, screenshots, a Loom script and a one-line note. Use whenever Rodney says "spec demo", "build a demo for [company]", "make something for this prospect", "build an asset for the [role] at [company]", "run the demo process on [URL]", or gives a prospect URL and wants a tangible asset to show them. Does not send anything to the prospect.
+description: Turns one prospect URL plus one role title into one free, brand-matched asset for that prospect's audience, deployed to one shareable link. Researches the company and the role (Firecrawl map, scrape and search), captures their site design, routes to the best-fit recipe (lead-magnet page, onboarding course page, buyer-signals table, interactive tool, or checkout page), builds it with the spec-demo kit, deploys it to Vercel and hands back the link, screenshots, a Loom script and a one-line note. Use whenever Rodney says "spec demo", "build a demo for [company]", "make something for this prospect", "build an asset for the [role] at [company]", "run the demo process on [URL]", or gives a prospect URL and wants a tangible asset to show them. Also runs batches: a list of URL + role pairs with one combined approval gate ("batch these", "run the batch"). Does not send anything to the prospect.
 ---
 
 # Spec demo
 
 > **Config:** values in `{{DOUBLE_BRACES}}` come from `config.local.md` in this skill's folder. If it is missing, copy `config.example.md` to `config.local.md` and fill it in. When a key lists several machines, use the value whose path exists here.
 
-**Input:** one prospect URL + one role title (e.g. "Head of Clinical Education"). Optional: an audience segment.
+**Input:** one prospect URL + one role title (e.g. "Head of Clinical Education"). Optional: an audience segment. For a list, see **Batch mode**.
 **Done =** one live URL that opens with no login, screenshots of that live page, and `asset-card.md`, `loom-script.md` and `note.md` in `{{SPEC_DEMO_OUTPUT_DIR}}/<company-slug>/`.
 
 Kit (templates and renderer): `{{SPEC_DEMO_KIT_DIR}}`. Read its `README.md` first; it holds the copy rules and the folder layout. This skill holds the process: `references/` and `recipes/`.
@@ -55,6 +55,28 @@ If the recipe's layout is not in the kit yet (status "planned" in the kit README
 2. `node "<kit>/shoot.mjs" .` (or Playwright on the live URL), desktop + mobile. Look at them: theme matches their site, nothing overflows on mobile, logo shows.
 3. Write `loom-script.md` and `note.md` per `references/delivery-pack.md`.
 4. Send Rodney the link and screenshots, plus a short note: role, recipe, asset name, open claims.
+
+## Batch mode (several companies, one approval stop)
+Use when Rodney gives a list instead of one URL ("batch these", "run the batch", a table of companies). Input: a numbered list of `URL + role` pairs, at most 5 per batch.
+
+**A. Prep, per company, one company at a time.** Run stages 1 to 3 (research, design, route) and fill each asset card, but do not stop at the gate. Sync GitHub and Notion after each stage as usual. Run Firecrawl calls one after another across the whole batch (free tier, about 12 a minute). If a company fails (site blocks scraping, no usable signal), mark it `Blocked: <reason>` in Notion, drop it from the table below and keep going.
+
+**B. One gate for the whole batch.** Set every company's Notion status to `Blocked: Rodney to approve the batch`, then show Rodney one table:
+
+| # | Company | Role | Recipe (runner-up) | Asset name | Signal it answers | Open questions |
+|---|---|---|---|---|---|---|
+
+Put each card's open questions (logo, icon, claims to confirm) in the last column, with a default for each. Link each `asset-card.md`. Ask for a reply that spells out the decision and ends with "deploy", for example:
+- `approve all, defaults ok, deploy`
+- `approve 1, 3, 4 with defaults; drop 2; 5 use lead-magnet; deploy`
+
+A bare "go", "yes" or "approve all" without "deploy" is not enough: ask once more for the full phrase. Record the decision on each card. Dropped companies get `Blocked: dropped at batch gate` and keep their files.
+
+**C. Build and ship, no more stops.** For each approved company in order: stage 4, stage 5, sync after each. If one fails a done check you can't fix, mark it `Blocked: <reason>` and move on; never stop the batch for one company.
+
+**D. One report.** A single table: company, recipe, live link, screenshots folder, status. Then the blocked ones and why. Same hand-off offers as one demo; nothing goes to a prospect.
+
+Done when every company in the batch is either live with screenshots and synced, or marked Blocked with a reason, and Rodney was asked exactly once.
 
 ## Save to GitHub and Notion after every stage
 Every demo lives in two places so other agents (Grokbot included) see the same state: the files in GitHub, the status in Notion. Sync both after **each** stage: brief, design, approved card, rendered site, deploy + delivery. In a batch, sync each company after each of its stages, not once at the end.
