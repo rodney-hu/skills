@@ -7,7 +7,11 @@ Every recipe renders a static `site/` (HTML, CSS, JS, assets, and a `vercel.json
 - **Before deploying,** `list_projects` with `search: "<company-slug>-demo"`. If it exists, deploy into it (a new recipe for the same company replaces the old page; say so on the card). If the `.vercel.app` name is taken outside the team, stop and ask Rodney; never accept a suffixed URL.
 - **Target:** production, so the short URL is assigned.
 
-## With the Vercel MCP (default, works in cloud sessions)
+## Which route
+- **On Rodney's Mac:** use the CLI (below) once it is logged in. It uploads the files itself, so nothing is retyped. If `vercel whoami` fails, ask Rodney to run `vercel login` once (it needs his browser), and use the MCP route meanwhile.
+- **In cloud sessions, or until the CLI is logged in:** the MCP route. Never paste file contents by hand. Generate the `files` array with the script, and after deploy compare every live file with the local one (a hash or byte-length check per file).
+
+## With the Vercel MCP (works in cloud sessions)
 1. Build the `files` array with a script, never by retyping file contents (a retyped payload drifts from the rendered files):
    `python3 -c "import json,os,base64;print(json.dumps([{'file':os.path.relpath(p,'site'),**({'data':open(p,encoding='utf-8').read(),'encoding':'utf-8'} if p.endswith(('.html','.css','.js','.json','.svg','.txt')) else {'data':base64.b64encode(open(p,'rb').read()).decode(),'encoding':'base64'})} for d,_,fs in os.walk('site') for p in [os.path.join(d,f) for f in fs]]))"`
    Collect every file under `site/`. Text files go in as `encoding: "utf-8"`, binaries (png, jpg, avif, webp, woff2, ico, and svg if unsure) as `base64`. Paths are relative to `site/` (e.g. `index.html`, `assets/logo.svg`).
