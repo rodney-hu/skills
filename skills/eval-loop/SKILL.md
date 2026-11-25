@@ -1,6 +1,6 @@
 ---
 name: eval-loop
-description: Build to a goal contract and iterate until every check passes. Takes a goal, pass/fail checks, files in scope, tier and round budget; builds, runs the checks, has the read-only eval-reviewer subagent grade the work against the contract, fixes only failing checks, and enforces a score ratchet so each version is no worse than the last. Use when Rodney or Claude Bot runs "/eval-loop", hands over an approved plan or goal contract, or says "build until the checks pass", "run the eval loop", or "iterate to the goal".
+description: Build to a goal contract and iterate until every check passes. Takes a goal, a named deliverable, pass/fail checks, files in scope, out of scope, approvals needed, deploy target, tier and round budget; builds, runs the checks, has the read-only eval-reviewer subagent grade the work against the contract, fixes only failing checks, and enforces a score ratchet so each version is no worse than the last. Use when Rodney or Claude Bot runs "/eval-loop", hands over an approved plan, build spec, or goal contract, or says "build until the checks pass", "run the eval loop", or "iterate to the goal".
 ---
 
 # Eval loop
@@ -25,7 +25,7 @@ On first run, create `.eval/` and copy `${CLAUDE_SKILL_DIR}/assets/eval.gitignor
 
 Input is `$ARGUMENTS`: a path to a contract, or a goal and plan inline. If inline, write it to `.eval/contract.md` using `${CLAUDE_SKILL_DIR}/assets/contract.template.md`.
 
-A valid contract has all six fields: goal, checks, files in scope, out of scope, tier, round budget. Every check is pass/fail and names its evidence (command, screenshot, or reviewer). If a field is missing or a check is vague ("looks good", "is clean"), stop and return the gap. Do not guess.
+A valid contract has these fields: goal, deliverable, checks, files in scope, out of scope, approvals needed, deploy target, tier, and round budget. Every check is pass/fail and names its evidence (command, screenshot, or reviewer). Deliverable must name an artifact, path, or URL. Approvals needed and deploy target may be `none`. If approvals needed includes `deploy`, deploy target cannot be `none`. If a field is missing or a check is vague ("looks good", "is clean"), stop and return the gap. Do not guess.
 
 Then:
 - Append every item in `.eval/checklist.md` that applies to the artifact type. These are standing checks.
@@ -82,7 +82,7 @@ For round n = 1 to budget:
 ## 6. Context hygiene
 
 - One contract per session. Start a fresh session for the next task.
-- When context is heavy, run `/compact` with: "Keep the contract goal, every check ID with its current pass/fail, decisions made, files touched, and the current round number. Drop file contents and tool output."
+- When context is heavy, run `/compact` with: "Keep the contract goal, the deliverable, every check ID with its current pass/fail, decisions made, files touched, and the current round number. Drop file contents and tool output."
 - Re-read `.eval/contract.md` after any compaction before touching code.
 
 ## 7. Finish
@@ -101,11 +101,11 @@ Checks:
 Regressions: <none | ids, reverted>
 Parked ideas: <none | one per line>
 Needs Rodney: <none | the decision>
-Artifact: <path, URL, or commit>
+Artifact: <the deliverable: path, URL, or commit>
 ```
 
 ## Rules
 
-- Never deploy, merge, push to main, delete data, spend money, or contact anyone. Those need Rodney's yes, given to Claude Bot directly.
+- Never deploy, merge, push to main, delete data, spend money, or contact anyone unless that exact action is named under Approvals needed and Rodney has already given his yes, quoted, to Claude Bot. Approvals needed is not itself permission. If it is `none`, those actions stay forbidden.
 - Never edit the contract to make a check pass. A check that's wrong is a "Needs Rodney" item.
 - Never mark a check PASS without evidence you can point to.

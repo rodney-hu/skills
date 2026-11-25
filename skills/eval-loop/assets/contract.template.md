@@ -3,6 +3,9 @@
 ## Goal
 <one line: the outcome, not the activity>
 
+## Deliverable
+<named artifact, path, or URL>
+
 ## Plan
 <the approved plan, or a link to it>
 
@@ -17,6 +20,12 @@
 
 ## Out of scope
 - <things not to touch or add>
+
+## Approvals needed
+<exact actions requiring Rodney's yes: push, deploy, merge, delete, spend, contact; or none>
+
+## Deploy target
+<platform, project, scope, live URL, or none>
 
 ## Tier
 Standard

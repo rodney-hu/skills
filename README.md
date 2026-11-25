@@ -1,6 +1,6 @@
 # Rodney Hu: Agent Skills
 
-25 skills I built to run GTM, copy and operations work with AI agents. Each one is a folder with a `SKILL.md` in the open [Agent Skills](https://agentskills.io) format, so it runs in Claude (Code, chat, Cowork), Google Antigravity, Gemini CLI, Cursor and any agent that reads `SKILL.md`.
+26 skills I built to run GTM, copy and operations work with AI agents. Each one is a folder with a `SKILL.md` in the open [Agent Skills](https://agentskills.io) format, so it runs in Claude (Code, chat, Cowork), Google Antigravity, Gemini CLI, Cursor and any agent that reads `SKILL.md`.
 
 This repo is the master copy. Every tool I use links to or installs from it.
 
@@ -54,6 +54,7 @@ Some skills read workspace IDs (Notion pages, databases) from a `config.local.md
 | [design-system-builder](skills/design-system-builder) | Builds a design system from scratch or audits and hardens an existing one |
 | [rodney-post-to-video](skills/rodney-post-to-video) | Turns a post into a beat-synced 1080×1350 motion-graphic video (needs Graphed's `tesseract-motion`) |
 | [idea-to-blueprint](skills/idea-to-blueprint) | Turns a raw idea into an MVP-first project blueprint |
+| [build-spec](skills/build-spec) | Turns a rough ask into an eval-loop contract: goal, deliverable, pass/fail checks, scope, tier, approvals and deploy target |
 | [eval-loop](skills/eval-loop) | Builds to a goal contract: pass/fail checks, a read-only Opus reviewer, tiers, round budget and a score ratchet |
 
 ### Operating system
