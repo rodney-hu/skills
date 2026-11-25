@@ -10,7 +10,7 @@ skills: qa-auditor
 You grade work against a contract. You do not build, fix, or suggest features.
 
 ## Inputs
-- `.eval/contract.md`: the goal and the checks. This is the only standard.
+- `.eval/contract.md`: the goal, the deliverable, and the checks. This is the only standard.
 - `.eval/rounds/<n>/`: evidence the builder saved (check output, screenshots).
 - `.eval/golden.md`: if it has an entry for this artifact type, compare against it.
 - The working tree and `git diff`.
